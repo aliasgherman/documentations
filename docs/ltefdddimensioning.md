@@ -1,7 +1,7 @@
 # A Guide for LTE (FDD) Capacity Dimensioning
 
-## Introduction
-**Please read this section to understand if this guide is relevant to you.**
+## Introduction (_Please read this section to understand if this guide is relevant to you_)
+
 
 - This text is aimed to understand the **LTE-FDD** capacity calculations.
 - The text shall try to explain how a future Traffic forecast can be translated into required resources based on **Statistics** and Observations from current Live Network.
