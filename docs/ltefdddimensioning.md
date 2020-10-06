@@ -42,26 +42,24 @@ In simplest term, we shall work our way to list down the overall available resou
 
 ## Time Domain
 
-| Parameter              | Normal Cyclic   Prefix | Extended Cyclic   Prefix | Comments                                                            |
-|------------------------|------------------------|--------------------------|---------------------------------------------------------------------|
-| Frame (ms)             | 10                     | 10                       | Our main unit for   time                                            |
-| SubFrame (ms)          | 1                      | 1                        |                                                                     |
-| Slot (ms)              | 0.5                    | 0.5                      | 2 slots in a subframe                                               |
-| Symbol per   Slot (nb) | 7                      | 6                        |                                                                     |
-| Symbol (us)            | 71.429                 | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |
-| Sampling Time   (ns)   | 32.55208333            | 32.55208333              | Sampling time   considering 2048 sample size                        |
+| Parameter              | Normal Cyclic   Prefix | Extended Cyclic   Prefix | Comments                                                            |   |
+|------------------------|------------------------|--------------------------|---------------------------------------------------------------------|---|
+| Frame (ms)             | 10                     | 10                       | Our main unit for   time                                            |   |
+| SubFrame (ms)          | 1                      | 1                        |                                                                     |   |
+| Slot (ms)              | 0.5                    | 0.5                      | 2 slots in a subframe                                               |   |
+| Symbol per   Slot (nb) | 7                      | 6                        |                                                                     |   |
+| Symbol (us)            | 71.429                 | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |   |
+| Sampling Time   (ns)   | 32.55208333            | 32.55208333              | Sampling time   considering 2048 sample size                        |   |
 
 ## Frequency Domain
 
 
-| Parameter                  | Value       | Comments                 | Comments                                                            |
-|----------------------------|-------------|--------------------------|---------------------------------------------------------------------|
-| Subcarriers   per RB       | 12          |                          | Our main unit for   time                                            |
-| Subcarrier   Spacing (KHz) | 15          |                          |                                                                     |
-| Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |
-| Symbol per   Slot (nb)     | 7           | 6                        |                                                                     |
-| Symbol (us)                | 71.429      | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |
-| Sampling Time   (ns)       | 32.55208333 | 32.55208333              | Sampling time   considering 2048 sample size                        |
+| Parameter                  | Value       | Comments                 | Comments                                                            |   |
+|----------------------------|-------------|--------------------------|---------------------------------------------------------------------|---|
+| Subcarriers   per RB       | 12          |                          | Our main unit for   time                                            |   |
+| Subcarrier   Spacing (KHz) | 15          |                          |                                                                     |   |
+| Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |   |
+
 
 ## RB vs. RE
 
@@ -71,6 +69,13 @@ A Resource Block (RB) is the smallest unit which can be allocated to a user. A R
 |--------------------|--------------------------|------------------------------------------------|------------------------------------------|
 | Resource Block     | 180                      | 7 or 6                                         | 0.5 for both                             |
 | Resource   Element | 15                       | 1 or 1                                         | 71.4us or 83.33us                        |
+
+Additionally, control channels are grouped together as CCEs which have the following mapping
+
+| Item                          | Number of REs | Comments              |
+|-------------------------------|---------------|-----------------------|
+| Resource Element Group (REG)  | 4             | 1 REG = 4 RE          |
+| Control Channel Element (CCE) | 36            | 1 CCE = 9 REG = 36 RE |
 
 ## Bandwidth vs. RBs
 
@@ -118,8 +123,8 @@ PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the R
 
 
 | Item | Frequency   Domain (subcarriers) | Time domain   (symbols per Frame) | Total RE for   PBCH | CSI-RS RE in the same region (4ports)| Only PBCH RE   Overhead (per Frame) |
-|------|----------------------------------|-----------------------------------|---------------------|--------------------------------------|-------------------------|
-| PBCH | 72                               | 4                                 | 288                 | 48                                   | 240                     |
+|------|----------------------------------|-----------------------------------|---------------------|--------------------------------------|-------------------------------------|
+| PBCH | 72                               | 4                                 | 288                 | 48                                   | 240                                 |
 
 ### PSS/SSS (Synchronization Signals)
 
