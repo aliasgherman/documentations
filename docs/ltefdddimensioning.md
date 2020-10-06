@@ -1,13 +1,51 @@
 # A Guide for LTE (FDD) Capacity Dimensioning
 
-## Introduction (_Please read this section to understand if this guide is relevant to you_)
+---
+
+
+
+## Introduction 
+**(_Please read this section to understand if this guide is relevant to you_)**
+
+---
+
+
 
 
 - This text is aimed to understand the **LTE-FDD** capacity calculations.
 - The text shall try to explain how a future Traffic forecast can be translated into required resources based on **Statistics** and Observations from current Live Network.
 - Essentially, this is a **practical dimensioning** exercise and **not** a theoretical one. Difference in both approaches is that for theoretical discussion, we assume a certain overhead for all our channels and work towards building the right model, whereas for practical dimensioning we shall get all these inputs via the available Statistics and plugin to our model to get desired results.
 
+---
+
+
 - I shall try to divide this text into **three** parts.
     1. Theoretical background and calculations **Read if you want to extend this documentation and want to gain a deeper understanding on the rationale**
     2. Defining required input statistics **Read if you are planning to use this model for your own network**
     3. Practical Modelling **Just read directly if you dont want to go theoretical and would like to check the practical impact only**
+
+
+---
+
+## Theoretical Background
+
+In simplest term, we shall work our way to list down the overall available resources for a LTE cell and then negate all the overheads we can think of. Later we shall see how to combine this with the certain efficiencies / inefficiencies introduced by the Scheduler to gain an understanding of the overall capacity. 
+
+    Capacity = f_thr(AvailableRBs) - ControlOverheads - CustomizedConfigs
+
+    where,
+        f_thr is a function of available RBs which provides what is the expected throughput considering all RF Conditions, Users, Resources etc.
+        
+        ControlOverheads are the overheads due to all control channels and bits like PCFICH, PSS, SSS, PBCH, DMRS, SRS etc.
+
+        CustomizedConfigs are some additional configurations which may reduce capacity further by allocating more control resources or enabling other features such as PRS
+
+### Basic Units
+
+| Unit Name  | Time  |
+|---|---|
+| Radio Frame  | 10ms  |
+| Sub Frame  | 1ms  |
+| Slot  | 0.5ms  |  
+| Symbol (Normal CP)  | 0.5ms/7  |
+| Symbol (Extended CP)  | 0.5ms/6  |
