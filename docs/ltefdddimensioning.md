@@ -42,26 +42,26 @@ In simplest term, we shall work our way to list down the overall available resou
 
 ## Time Domain
 
-| Parameter              | Normal Cyclic   Prefix | Extended Cyclic   Prefix | Comments                                                            |   |
-|------------------------|------------------------|--------------------------|---------------------------------------------------------------------|---|
-| Frame (ms)             | 10                     | 10                       | Our main unit for   time                                            |   |
-| SubFrame (ms)          | 1                      | 1                        |                                                                     |   |
-| Slot (ms)              | 0.5                    | 0.5                      | 2 slots in a subframe                                               |   |
-| Symbol per   Slot (nb) | 7                      | 6                        |                                                                     |   |
-| Symbol (us)            | 71.429                 | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |   |
-| Sampling Time   (ns)   | 32.55208333            | 32.55208333              | Sampling time   considering 2048 sample size                        |   |
+| Parameter              | Normal Cyclic   Prefix | Extended Cyclic   Prefix | Comments                                                            |
+|------------------------|------------------------|--------------------------|---------------------------------------------------------------------|
+| Frame (ms)             | 10                     | 10                       | Our main unit for   time                                            |
+| SubFrame (ms)          | 1                      | 1                        |                                                                     |
+| Slot (ms)              | 0.5                    | 0.5                      | 2 slots in a subframe                                               |
+| Symbol per   Slot (nb) | 7                      | 6                        |                                                                     |
+| Symbol (us)            | 71.429                 | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |
+| Sampling Time   (ns)   | 32.55208333            | 32.55208333              | Sampling time   considering 2048 sample size                        |
 
 ## Frequency Domain
 
 
-| Parameter                  | Value       | Comments                 | Comments                                                            |   |
-|----------------------------|-------------|--------------------------|---------------------------------------------------------------------|---|
-| Subcarriers   per RB       | 12          |                          | Our main unit for   time                                            |   |
-| Subcarrier   Spacing (KHz) | 15          |                          |                                                                     |   |
-| Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |   |
-| Symbol per   Slot (nb)     | 7           | 6                        |                                                                     |   |
-| Symbol (us)                | 71.429      | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |   |
-| Sampling Time   (ns)       | 32.55208333 | 32.55208333              | Sampling time   considering 2048 sample size                        |   |
+| Parameter                  | Value       | Comments                 | Comments                                                            |
+|----------------------------|-------------|--------------------------|---------------------------------------------------------------------|
+| Subcarriers   per RB       | 12          |                          | Our main unit for   time                                            |
+| Subcarrier   Spacing (KHz) | 15          |                          |                                                                     |
+| Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |
+| Symbol per   Slot (nb)     | 7           | 6                        |                                                                     |
+| Symbol (us)                | 71.429      | 83.333                   | 7 symbols in a slot   (Normal CP), 6 symbols per slot (Extended CP) |
+| Sampling Time   (ns)       | 32.55208333 | 32.55208333              | Sampling time   considering 2048 sample size                        |
 
 ## RB vs. RE
 
