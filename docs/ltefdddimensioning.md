@@ -65,10 +65,11 @@ In simplest term, we shall work our way to list down the overall available resou
 
 A Resource Block (RB) is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
 
-| Parameter          | Frequency   Domain (Khz) | Time Domain   Symbols (Normal vs. Extended CP) | Time Domain   (ms) (Normal vs. Extended) |
-|--------------------|--------------------------|------------------------------------------------|------------------------------------------|
-| Resource Block     | 180                      | 7 or 6                                         | 0.5 for both                             |
-| Resource   Element | 15                       | 1 or 1                                         | 71.4us or 83.33us                        |
+| Parameter          | Frequency   Domain (Khz) | Time   Domain Symbols (Normal vs. Extended CP) | Time   Domain (ms) (Normal vs. Extended)   |
+|--------------------|--------------------------|------------------------------------------------|--------------------------------------------|
+| Resource   Block   | 180                      | 7 or 6                                         | 0.5 for   both                             |
+| Resource   Element | 15                       | 1 or 1                                         | 71.4us or   83.33us                        |
+| RE in 1 RB         | 12                       | 7 or 6                                         | 1RB = 84RE (Normal CP), 72RE (Extended CP) |
 
 Additionally, control channels are grouped together as CCEs which have the following mapping
 
