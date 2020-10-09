@@ -254,7 +254,7 @@ Till this point, we have collected pretty much all downlink control channel over
 
 With the available informations, we can work for Phase 1 Control Channel capacity calculations via below table. The only dynamic formula in this sheet is for the CFI. In almost all networks, CFI is dynamically modified based on PDCCH demand and for our calculations, we can incorporate this factor as well. The way to do it can be to get the CFI Usage Ratio of CFI1, CFI2 and CFI3. 
 
-_Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for _
+Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for
 
 **PDCCH Overhead = (PDCCH overhead for CFI1 x 0.3) + (PDCCH Overhead for CFI2 x 0.3) +  (PDCCH Overhead for CFI3 x 0.4)**
 
