@@ -235,3 +235,41 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
 ---
 
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+<div class="row">
+    <div class="input-field col s12">
+          <input id="cfi1_usage" type="number" class="validate">
+          <label for="cfi1_usage">CFI 1 Usage (0.0 - 1.0)</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s12">
+          <input id="cfi2_usage" type="number" class="validate">
+          <label for="cfi2_usage">CFI 2 Usage (0.0 - 1.0)</label>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="input-field col s12">
+          <input id="cfi3_usage" type="number" class="validate">
+          <label for="cfi3_usage">CFI 3 Usage (0.0 - 1.0)</label>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    
+  M.AutoInit();
+  
+  
+</script>
