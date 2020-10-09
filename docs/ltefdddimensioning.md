@@ -32,6 +32,11 @@
 
 ---
 
+
+---
+
+
+
 ## Theoretical Background
 
 In simplest term, we shall work our way to list down the overall available resources for a LTE cell and then negate all the overheads we can think of. Later we shall see how to combine this with the certain efficiencies / inefficiencies introduced by the Scheduler to gain an understanding of the overall capacity. 
@@ -44,6 +49,10 @@ In simplest term, we shall work our way to list down the overall available resou
         ControlOverheads are the overheads due to all control channels and bits like PCFICH, PSS, SSS, PBCH, DMRS, SRS etc.
 
         CustomizedConfigs are some additional configurations which may reduce capacity further by allocating more control resources or enabling other features such as PRS
+
+
+---
+
 
 ### Time Domain
 
@@ -59,6 +68,10 @@ In simplest term, we shall work our way to list down the overall available resou
 | Symbol   (us)            | 71.429                 | 83.333                   | 7 symbols   in a slot (Normal CP), 6 symbols per slot (Extended CP) |
 | Sampling   Time (ns)     | 32.55208333            | 32.55208333              | Sampling   time considering 2048 sample size                        |
 
+
+---
+
+
 ### Frequency Domain
 
 
@@ -67,6 +80,10 @@ In simplest term, we shall work our way to list down the overall available resou
 | Subcarriers   per RB       | 12          |                          | Our main unit for   time                                            |
 | Subcarrier   Spacing (KHz) | 15          |                          |                                                                     |
 | Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |
+
+
+
+---
 
 
 ### RB vs. RE
@@ -86,6 +103,10 @@ Additionally, control channels are grouped together as CCEs which have the follo
 | Resource Element Group (REG)  | 4             | 1 REG = 4 RE          |
 | Control Channel Element (CCE) | 36            | 1 CCE = 9 REG = 36 RE |
 
+
+---
+
+
 ### Bandwidth vs. RBs
 
 Another table just for the sake of completeness. Below refers to the number of RBs vs. LTE total bandwidth. As you can see that the number of RBs does not cover the entire bandwidth and the rest of the frequency is mainly used as the guard band on the edge of the spectrum.
@@ -99,7 +120,17 @@ Another table just for the sake of completeness. Below refers to the number of R
 | 15 MHz    | 75              |
 | 20 MHz    | 100             |
 
+
+---
+
+
+---
+
+
 ### Overhead Calculations
+
+---
+
 
 #### CSI-RS (Cell specific reference signals)
 
@@ -126,6 +157,9 @@ These symbols are the easiest to undestand as they provide the reference mathema
 | 20     | 2            | 16                                                   | 100       | 160                                  | 16000                                        |
 | 20     | 4            | 24                                                   | 100       | 240                                  | 24000                                        |
 
+---
+
+
 #### PBCH (Physical Broadcast Channel)
 
 PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the REs which should transmit CSI-RS in these areas, they shall not be mapped for PBCH. So, that overhead should be subtracted to not count it twice (once as CSI-RS and then as PBCH).
@@ -134,6 +168,9 @@ PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the R
 | Item | Frequency (subcarriers) | Time (symbols per Frame) | Total RE for   PBCH | CSI-RS RE overlaps (4ports)| Only PBCH RE   Overhead (per Frame) |
 |------|----------------------------------|-----------------------------------|---------------------|--------------------------------------|-------------------------------------|
 | PBCH | 72                               | 4                                 | 288                 | 48                                   | 240                                 |
+
+---
+
 
 #### PSS/SSS (Synchronization Signals)
 
@@ -144,6 +181,9 @@ They are the PCI carriers. Everyone knows about them, other signals want to be t
 | PSS  | 144                                                                    |
 | SSS  | 144                                                                    |
 
+---
+
+
 ### PCFICH (Physical Control Format Indicator Channel)
 
 It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS space as unused but treats the CSI symbol locations as if used Antenna ports were greater than 1. So an additional overhead per frame should be considered for this case as mentioned in below table.
@@ -153,6 +193,9 @@ It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS sp
 | Item   | Total RE/SubFrame | Total RE/Frame | Added unused RE if SISO/Frame |
 |--------|------------------------|---------------------|-------------------------------------------------------------|
 | PCFICH | 16                     | 160                 | 40                                                          |
+
+
+---
 
 
 #### PHICH (Physical HARQ Indicator Channel)
@@ -167,6 +210,9 @@ This is the guy which indicates ACK / NACK and is for individual user. It uses s
 | PHICH | 10 MHz    | 21                      | 84                    | 840                      |
 | PHICH | 15 MHz    | 30                      | 120                   | 1200                     |
 | PHICH | 20MHz     | 39                      | 156                   | 1560                     |
+
+---
+
 
 #### PDCCH (Physical Downlink Control Channel)
 
