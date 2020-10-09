@@ -3,6 +3,11 @@
 ---
 
 
+# TL;DR;
+1. Dont read calculation details, jump to Calculator (Phase1) directly.
+2. Dont want to do 2 phases, jump to Phase2 directly
+3. Feedback to <aliasgherman at gmail>
+
 
 ## Introduction 
 **(_Please read this section to understand if this guide is relevant to you_)**
@@ -12,7 +17,7 @@
 
 
 
-- This text is aimed to understand the **LTE-FDD** capacity calculations.
+- This text is aimed to understand the **LTE-FDD** capacity calculations. These are without DSS enabled
 - The text shall try to explain how a future Traffic forecast can be translated into required resources based on **Statistics** and Observations from current Live Network.
 - Essentially, this is a **practical dimensioning** exercise and **not** a theoretical one. Difference in both approaches is that for theoretical discussion, we assume a certain overhead for all our channels and work towards building the right model, whereas for practical dimensioning we shall get all these inputs via the available Statistics and plugin to our model to get desired results.
 
@@ -66,7 +71,7 @@ In simplest term, we shall work our way to list down the overall available resou
 
 ### RB vs. RE
 
-A Resource Block (RB) is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
+A *Resource Block (RB)* is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
 
 | Parameter          | Frequency   Domain (Khz) | Time   Domain Symbols (Normal vs. Extended CP) | Time   Domain (ms) (Normal vs. Extended)   |
 |--------------------|--------------------------|------------------------------------------------|--------------------------------------------|
@@ -197,7 +202,7 @@ As we are still in the theoretical section, lets see the PDCCH REs based on CFI.
 
 
 
-## Combining All Together
+## Phase 1 Conclusion
 
 Till this point, we have collected pretty much all downlink control channel overheads and we can now estimate remaining PDSCH resources. **Beware**, this is only part 1 of the exercise as we will now need to incorporate the **scheduling** parameters into available PDSCH resources to compute available capacity.
 
@@ -205,7 +210,7 @@ With the available informations, we can work for Phase 1 Control Channel capacit
 
 _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for _
 
-**PDCCH Overhead = (PDCCH overhead for CFI1 * 0.3) + (PDCCH Overhead for CFI2 * 0.3) +  (PDCCH Overhead for CFI3 * 0.4) **
+**PDCCH Overhead = (PDCCH overhead for CFI1 * 0.3) + (PDCCH Overhead for CFI2 * 0.3) +  (PDCCH Overhead for CFI3 * 0.4)**
 
 
 
