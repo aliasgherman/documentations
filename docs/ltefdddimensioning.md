@@ -3,8 +3,8 @@
 ---
 
 
-# TL;DR;
-1. Dont want to read calculation details, jump to [Phase 1 Calculator](#phase-1-calculator)
+# Direct to Business;
+1. Dont want to read calculation details, then just jump to [Phase 1 Calculator](#phase-1-calculator)
 2. Dont want to do 2 phases, jump to Phase2 directly // TODO
 3. Feedback to aliasgherman at gmail
 
