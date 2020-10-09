@@ -4,8 +4,8 @@
 
 
 # TL;DR;
-1. Dont read calculation details, jump to Calculator (Phase1) directly.
-2. Dont want to do 2 phases, jump to Phase2 directly
+1. Dont want to read calculation details, jump to [Phase 1 Calculator](#phase-1-calculator)
+2. Dont want to do 2 phases, jump to Phase2 directly // TODO
 3. Feedback to <aliasgherman at gmail>
 
 
@@ -202,7 +202,7 @@ As we are still in the theoretical section, lets see the PDCCH REs based on CFI.
 
 
 
-## Phase 1 Conclusion
+## Phase 1 Calculator
 
 Till this point, we have collected pretty much all downlink control channel overheads and we can now estimate remaining PDSCH resources. **Beware**, this is only part 1 of the exercise as we will now need to incorporate the **scheduling** parameters into available PDSCH resources to compute available capacity.
 
