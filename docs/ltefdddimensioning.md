@@ -210,7 +210,7 @@ With the available informations, we can work for Phase 1 Control Channel capacit
 
 _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for _
 
-**PDCCH Overhead = (PDCCH overhead for CFI1 * 0.3) + (PDCCH Overhead for CFI2 * 0.3) +  (PDCCH Overhead for CFI3 * 0.4)**
+**PDCCH Overhead = (PDCCH overhead for CFI1 x 0.3) + (PDCCH Overhead for CFI2 x 0.3) +  (PDCCH Overhead for CFI3 x 0.4)**
 
 
 
