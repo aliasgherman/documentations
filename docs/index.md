@@ -30,4 +30,8 @@ I have tried to include the theoretical background as well in order to help the 
 
 <script>
 document.getElementById("text").innerHTML = "Text added by JavaScript code";
+    
+  M.AutoInit();
+  
+  
 </script>
