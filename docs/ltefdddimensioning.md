@@ -330,6 +330,38 @@ If we explore these tables, we will see that efficiency is almost a linear funct
 
 ![CQI vs. Efficiency Curve](/docs/img/256QAM.jpg?raw=true)
 
+## Phase 2 - Calculations
+
+	Assume,
+		Remaining RE for PDSCH (WITHOUT CONSIDERING MIMO GAIN) = n_re_pdsch_wo_mimo
+		IBLER_Ratio = 0.12 //12% Initial block error rate
+		CQI = 10.3 //Average CQI values in cell
+		Rank2_Ratio = 0.45 //45% Rank2 PRB Usage. 
+		Rank3_Ratio = 0.05 //
+		Rank4_Ratio = 0.02 //2% Rank4 PRB Usage.
+		256QAM_Usage = 0.09 //9% 256QAM Usage in the cell
+	
+	Then,
+		We need to first interpolate the CQI to MCS table for non integer values. This means we have to calculate the Efficiency Factor for both Table1 and Table 2 for a CQI value of 10.3 (as given in our input parameters above).
+		
+		Table1
+		CQI = 10 Efficiency_EF1: 2.7305, CQI = 11 Efficiency_EF2: 3.3223
+		For CQI = 10.3, 
+			Efficiency = (Efficiency_EF2 - Efficiency_EF1) * (10.3 - 10) + Efficiency_EF1
+		
+		The above formula is simply considering the slope of line formula (y = mx + b), and trying to add the efficiency of CQI=10 and then adding the efficiency based on the slope between efficiency of CQI 11 and CQI 10.
+		
+		n_efficiency = Efficiency_table1 * (1 - 256QAM_Usage) + Efficiency_table2 * (256QAM_Usage)
+		
+
+Considering that you did read the above paragraph, the final Cell Capacity would be calculated as,
+
+Cell Capacity (Mbps) = n_re_pdsch_wo_mimo x n_efficiency x (1 + Rank2_Ratio) x (2 + Rank3_Ratio) x (3 + Rank4_Ratio) x (1 - IBLER_Ratio) / 1024 / 1024
+
+3 + Rank4_Ratio can be understood by considering that if a cell carries 100% traffic with Rank4, then this term would become (3 + 1) giving a capacity 4 times the PDSCH RE resources (as we are considering the PDSCH resources without MIMO).  
+
+**Phew**. This was too much indeed. 
+
 ## Phase 1 Calculator
 
 Till this point, we have collected pretty much all downlink control channel overheads and we can now estimate remaining PDSCH resources. **Beware**, this is only part 1 of the exercise as we will now need to incorporate the **scheduling** parameters into available PDSCH resources to compute available capacity.
