@@ -16,7 +16,7 @@ I have tried to include the theoretical background as well in order to help the 
 
 <div id="text"></div>
 
-<div class="input">
+<div class="input-field col s12">
     <select>
       <option value="" disabled selected>Choose your option</option>
       <option value="1">Option 1</option>
