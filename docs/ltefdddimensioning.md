@@ -328,7 +328,7 @@ Lets first put down the CQI-MCS tables below.
 
 If we explore these tables, we will see that efficiency is almost a linear function of CQI for both tables. Indeed, 256QAM pushes the efficiency higher quicker compared to 64QAM. The tradeoff is that with such implementations, if a scheduler pushes for 256QAM more and more, the block error rates will also increase due to the increased interference (256QAM will have higher power requirements due to 256 I/Q combinations and without higher power these will be extremely close to each other causing decoding errors).
 
-
+![CQI vs. Efficiency Curve](/img/256QAM.jpg)
 
 ## Phase 1 Calculator
 
