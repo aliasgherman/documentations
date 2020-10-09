@@ -241,6 +241,7 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
+
 <div class="row">
     <div class="input-field col s4">
           <input id="cfi1_usage" type="number" class="validate" min=0 max=1>
@@ -259,7 +260,6 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 <div class="row">
     <div class="input-field col s4">
     <select>
-      <option value="" disabled selected>Bandwidth Select (MHz)</option>
       <option value="1.4">1.4</option>
       <option value="3">3</option>
       <option value="5">5</option>
@@ -272,7 +272,6 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
     <div class="input-field col s4">
     <select>
-      <option value="" disabled selected>Antenna Ports (DL)</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="4">4</option>
