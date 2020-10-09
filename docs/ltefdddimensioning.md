@@ -280,7 +280,7 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
     </div>
 
     <div class="input-field col s4">
-        <a class="waves-effect waves-light btn" id="calculate_control_overheads" onclick="calc_overheads"">Calculate Overheads</a>
+        <a class="waves-effect waves-light btn" id="calculate_control_overheads" onclick="calc_overheads">Calculate Overheads</a>
     </div>
 
 </div>
