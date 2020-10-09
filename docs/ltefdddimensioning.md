@@ -242,27 +242,49 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
 
 <div class="row">
-    <div class="input-field col s12">
-          <input id="cfi1_usage" type="number" class="validate">
+    <div class="input-field col s4">
+          <input id="cfi1_usage" type="number" class="validate" min=0 max=1>
           <label for="cfi1_usage">CFI 1 Usage (0.0 - 1.0)</label>
     </div>
-</div>
-
-<div class="row">
-    <div class="input-field col s12">
-          <input id="cfi2_usage" type="number" class="validate">
+    <div class="input-field col s4">
+          <input id="cfi2_usage" type="number" class="validate" min=0 max=1>
           <label for="cfi2_usage">CFI 2 Usage (0.0 - 1.0)</label>
     </div>
+    <div class="input-field col s4">
+          <input id="cfi3_usage" type="number" class="validate" min=0 max=1>
+          <label for="cfi3_usage">CFI 3 Usage (0.0 - 1.0)</label>
+    </div>    
 </div>
-
 
 <div class="row">
-    <div class="input-field col s12">
-          <input id="cfi3_usage" type="number" class="validate">
-          <label for="cfi3_usage">CFI 3 Usage (0.0 - 1.0)</label>
+    <div class="input-field col s4">
+    <select>
+      <option value="" disabled selected>Bandwidth Select (MHz)</option>
+      <option value="1.4">1.4</option>
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>        
+    </select>
+    <label>Select Bandwidth (MHz)</label>
     </div>
-</div>
 
+    <div class="input-field col s4">
+    <select>
+      <option value="" disabled selected>Antenna Ports (DL)</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+    </select>
+    <label>Select Antenna Ports</label>
+    </div>
+
+    <div class="input-field col s4">
+        <a class="waves-effect waves-light btn" id="calculate_control_overheads">Calculate Overheads</a>
+    </div>
+
+</div>
 
 
 
