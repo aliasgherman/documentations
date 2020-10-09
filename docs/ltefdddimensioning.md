@@ -247,6 +247,88 @@ As we are still in the theoretical section, lets see the PDCCH REs based on CFI.
 ---
 
 
+## Phase 2 - PDSCH RE to Capacity
+
+Congratulations! You made it till this part somehow. Now, we have collected the Control channel overheads and if we get all Resource Elements and subtract the Control Overheads, we would get the available REs for PDSCH. The cell capacity or throughput can be estimated based on
+
+* Available REs for PDSCH
+* CQI 
+* 256QAM Usage Ratio (0 - 1)
+* Rank 2, 4 Usage
+* IBLER 
+
+Lets briefly explore what each term means and its significance on the cell capacity.
+
+### Available RE for PDSCH
+
+This is simplest to understand. It signifies the total available REs which we can utilize for PDSCH. Each RE can carry multiple bits of information which is based on the modulation scheme utilized. (BPSK = 1 bit, QPSK = 2, 16QAM = 4, 64QAM = 6, 256QAM = 8). The factor of used Modulation Schemes will come into our calculations with the usage of CQI to MCS tables and 256QAM usage percentage.
+
+### 256QAM Ratio
+
+This value from 0 - 1 will indicate how much traffic uses 256QAM modulation scheme. 3GPP 36.213 specifies two CQI to MCS tables alongwith the Code Rate (amount of information bits + amount of redundant bits) / (transport block size in bits). The first table is utilized when reported CQI mapping is for scenarios without 256QAM usage and the second table is when 256QAM is used. For our calculations, we use these tables like below
+
+> calculated_efficiency = 64qam_efficiency_table_for_cqi_X * (1 - 256QAM_Ratio) + 256qam_efficiency_table_for_cqi_X * (256QAM_Ratio)
+>	Where,
+>		64qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-1 for CQI = X
+>		256qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-2 for CQI = X
+
+### Rank2 , 4 Ratio
+
+As we calculated the overheads in control channels, we noticed that with higher Antenna ports, the overheads are different. Theoretically, with perfect orthogonality for users receiving streams from all antennas, we can transmit completely different streams on each antenna port. This essentially means that with 4 port antenna, we can potentitally have 4 times the data rate. 
+This is where the Rank 2-4 % comes in useful. If we utilize the KPIs or design values for the Rank 2 ratio, we would consider this amount of PDSCH available RE to be able to provide double the throughput.
+So, it is important to not consider all 4 ports as potentially 4 times the cell capacity as this depends heavily on RF conditions and UE capabilities. Indeed, it is a better idea to incorporate the Rank indications to get to a more realistic picture of how much capacity an actual MIMO system will provide over a SISO configuration.
+
+### IBLER
+
+Well, MAC layer is tough. Just like life. Not all packets are decoded the first time. The scheduler is designed to balance between allocated MCS and RBs in a way to converge to a configured initial block error rate (IBLER). This means that the PDSCH resources will be used to retransmit this amount of data bits so it should not be counted as a useable throughput during capacity calculations.
+
+### CQI to MCS Tables
+
+Lets first put down the CQI-MCS tables below.
+
+**Table 1 - 64QAM**
+| CQI index |  modulation  | code rate x 1024 | efficiency |
+|:---------:|:------------:|:----------------:|:----------:|
+|     0     | out of range |                  |            |
+|     1     |     QPSK     |        78        |   0.1523   |
+|     2     |     QPSK     |        120       |   0.2344   |
+|     3     |     QPSK     |        193       |    0.377   |
+|     4     |     QPSK     |        308       |   0.6016   |
+|     5     |     QPSK     |        449       |    0.877   |
+|     6     |     QPSK     |        602       |   1.1758   |
+|     7     |     16QAM    |        378       |   1.4766   |
+|     8     |     16QAM    |        490       |   1.9141   |
+|     9     |     16QAM    |        616       |   2.4063   |
+|     10    |     64QAM    |        466       |   2.7305   |
+|     11    |     64QAM    |        567       |   3.3223   |
+|     12    |     64QAM    |        666       |   3.9023   |
+|     13    |     64QAM    |        772       |   4.5234   |
+|     14    |     64QAM    |        873       |   5.1152   |
+|     15    |     64QAM    |        948       |   5.5547   |
+
+**Table 1 - 256QAM**
+| CQI index |  modulation  | code rate x 1024 | efficiency |
+|:---------:|:------------:|:----------------:|:----------:|
+|     0     | out of range |                  |            |
+|     1     |     QPSK     |        78        |   0.1523   |
+|     2     |     QPSK     |        193       |    0.377   |
+|     3     |     QPSK     |        449       |    0.877   |
+|     4     |    16QAM     |        378       |   1.4766   |
+|     5     |    16QAM     |        490       |   1.9141   |
+|     6     |    16QAM     |        616       |   2.4063   |
+|     7     |    64QAM     |        466       |   2.7305   |
+|     8     |    64QAM     |        567       |   3.3223   |
+|     9     |    64QAM     |        666       |   3.9023   |
+|     10    |    64QAM     |        772       |   4.5234   |
+|     11    |    64QAM     |        873       |   5.1152   |
+|     12    |    256QAM    |        711       |   5.5547   |
+|     13    |    256QAM    |        797       |   6.2266   |
+|     14    |    256QAM    |        885       |   6.9141   |
+|     15    |    256QAM    |        948       |   7.4063   |
+
+If we explore these tables, we will see that efficiency is almost a linear function of CQI for both tables. Indeed, 256QAM pushes the efficiency higher quicker compared to 64QAM. The tradeoff is that with such implementations, if a scheduler pushes for 256QAM more and more, the block error rates will also increase due to the increased interference (256QAM will have higher power requirements due to 256 I/Q combinations and without higher power these will be extremely close to each other causing decoding errors).
+
+
 
 ## Phase 1 Calculator
 
