@@ -40,7 +40,7 @@ In simplest term, we shall work our way to list down the overall available resou
 
         CustomizedConfigs are some additional configurations which may reduce capacity further by allocating more control resources or enabling other features such as PRS
 
-## Time Domain
+### Time Domain
 
 | Parameter                | Normal   Cyclic Prefix | Extended   Cyclic Prefix | Comments                                                            |
 |--------------------------|------------------------|--------------------------|---------------------------------------------------------------------|
@@ -54,7 +54,7 @@ In simplest term, we shall work our way to list down the overall available resou
 | Symbol   (us)            | 71.429                 | 83.333                   | 7 symbols   in a slot (Normal CP), 6 symbols per slot (Extended CP) |
 | Sampling   Time (ns)     | 32.55208333            | 32.55208333              | Sampling   time considering 2048 sample size                        |
 
-## Frequency Domain
+### Frequency Domain
 
 
 | Parameter                  | Value       | Comments                 | Comments                                                            |
@@ -64,7 +64,7 @@ In simplest term, we shall work our way to list down the overall available resou
 | Total RB BW   (KHz)        | 180         | 12 subcarriers *   15KHz | 2 slots in a subframe                                               |
 
 
-## RB vs. RE
+### RB vs. RE
 
 A Resource Block (RB) is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
 
@@ -81,7 +81,7 @@ Additionally, control channels are grouped together as CCEs which have the follo
 | Resource Element Group (REG)  | 4             | 1 REG = 4 RE          |
 | Control Channel Element (CCE) | 36            | 1 CCE = 9 REG = 36 RE |
 
-## Bandwidth vs. RBs
+### Bandwidth vs. RBs
 
 Another table just for the sake of completeness. Below refers to the number of RBs vs. LTE total bandwidth. As you can see that the number of RBs does not cover the entire bandwidth and the rest of the frequency is mainly used as the guard band on the edge of the spectrum.
 
@@ -94,43 +94,43 @@ Another table just for the sake of completeness. Below refers to the number of R
 | 15 MHz    | 75              |
 | 20 MHz    | 100             |
 
-## Overhead Calculations
+### Overhead Calculations
 
-### CSI-RS (Cell specific reference signals)
+#### CSI-RS (Cell specific reference signals)
 
 These symbols are the easiest to undestand as they provide the reference mathematical equations for the user. These are used by the UE to determine the RSRP and channel conditions. A specific number of REs are transmitted as CSI-RS and based on number of Antenna ports, there are certain REs on certain Antenna ports which remain as unused. The below table can be used to calculate this overhead.
 
-| Bandwidth | Antenna Port | Number of CSR-RS RE(or unused) per SubFrame   per RB | Total RBs | Number of CSR-RS RE per Frame per RB | Total Number of CSI-RS(or unused)  per Frame |
+| Bandwidth (Mhz) | Antenna Port | CSIRS/Subframe/RB | Total RBs | CSIRS/Frame/RB | Total CSIRS/Unused RE in Frame |
 |-----------|--------------|------------------------------------------------------|-----------|--------------------------------------|----------------------------------------------|
-| 1.4 MHz   | 1            | 8                                                    | 6         | 80                                   | 480                                          |
-| 1.4 MHz   | 2            | 16                                                   | 6         | 160                                  | 960                                          |
-| 1.4 MHz   | 4            | 24                                                   | 6         | 240                                  | 1440                                         |
-| 3 MHz     | 1            | 8                                                    | 15        | 80                                   | 1200                                         |
-| 3 MHz     | 2            | 16                                                   | 15        | 160                                  | 2400                                         |
-| 3 MHz     | 4            | 24                                                   | 15        | 240                                  | 3600                                         |
-| 5 MHz     | 1            | 8                                                    | 25        | 80                                   | 2000                                         |
-| 5 MHz     | 2            | 16                                                   | 25        | 160                                  | 4000                                         |
-| 5 MHz     | 4            | 24                                                   | 25        | 240                                  | 6000                                         |
-| 10 MHz    | 1            | 8                                                    | 50        | 80                                   | 4000                                         |
-| 10 MHz    | 2            | 16                                                   | 50        | 160                                  | 8000                                         |
-| 10 MHz    | 4            | 24                                                   | 50        | 240                                  | 12000                                        |
-| 15 MHz    | 1            | 8                                                    | 75        | 80                                   | 6000                                         |
-| 15 MHz    | 2            | 16                                                   | 75        | 160                                  | 12000                                        |
-| 15 MHz    | 4            | 24                                                   | 75        | 240                                  | 18000                                        |
-| 20 MHz    | 1            | 8                                                    | 100       | 80                                   | 8000                                         |
-| 20 MHz    | 2            | 16                                                   | 100       | 160                                  | 16000                                        |
-| 20 MHz    | 4            | 24                                                   | 100       | 240                                  | 24000                                        |
+| 1.4   | 1            | 8                                                    | 6         | 80                                   | 480                                          |
+| 1.4   | 2            | 16                                                   | 6         | 160                                  | 960                                          |
+| 1.4   | 4            | 24                                                   | 6         | 240                                  | 1440                                         |
+| 3      | 1            | 8                                                    | 15        | 80                                   | 1200                                         |
+| 3      | 2            | 16                                                   | 15        | 160                                  | 2400                                         |
+| 3      | 4            | 24                                                   | 15        | 240                                  | 3600                                         |
+| 5      | 1            | 8                                                    | 25        | 80                                   | 2000                                         |
+| 5      | 2            | 16                                                   | 25        | 160                                  | 4000                                         |
+| 5      | 4            | 24                                                   | 25        | 240                                  | 6000                                         |
+| 10     | 1            | 8                                                    | 50        | 80                                   | 4000                                         |
+| 10     | 2            | 16                                                   | 50        | 160                                  | 8000                                         |
+| 10     | 4            | 24                                                   | 50        | 240                                  | 12000                                        |
+| 15     | 1            | 8                                                    | 75        | 80                                   | 6000                                         |
+| 15     | 2            | 16                                                   | 75        | 160                                  | 12000                                        |
+| 15     | 4            | 24                                                   | 75        | 240                                  | 18000                                        |
+| 20     | 1            | 8                                                    | 100       | 80                                   | 8000                                         |
+| 20     | 2            | 16                                                   | 100       | 160                                  | 16000                                        |
+| 20     | 4            | 24                                                   | 100       | 240                                  | 24000                                        |
 
-### PBCH (Physical Broadcast Channel)
+#### PBCH (Physical Broadcast Channel)
 
 PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the REs which should transmit CSI-RS in these areas, they shall not be mapped for PBCH. So, that overhead should be subtracted to not count it twice (once as CSI-RS and then as PBCH).
 
 
-| Item | Frequency   Domain (subcarriers) | Time domain   (symbols per Frame) | Total RE for   PBCH | CSI-RS RE in the same region (4ports)| Only PBCH RE   Overhead (per Frame) |
+| Item | Frequency (subcarriers) | Time (symbols per Frame) | Total RE for   PBCH | CSI-RS RE overlaps (4ports)| Only PBCH RE   Overhead (per Frame) |
 |------|----------------------------------|-----------------------------------|---------------------|--------------------------------------|-------------------------------------|
 | PBCH | 72                               | 4                                 | 288                 | 48                                   | 240                                 |
 
-### PSS/SSS (Synchronization Signals)
+#### PSS/SSS (Synchronization Signals)
 
 They are the PCI carriers. Everyone knows about them, other signals want to be them. They also occupy 72 subcarriers (they use 62 and keep 10 as their buffer of unused RE) and in time domain they occur once in a half-frame. (5ms period).
 
@@ -143,12 +143,14 @@ They are the PCI carriers. Everyone knows about them, other signals want to be t
 
 It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS space as unused but treats the CSI symbol locations as if used Antenna ports were greater than 1. So an additional overhead per frame should be considered for this case as mentioned in below table.
 
-| Item   | Total RE in a SubFrame | Total RE in a Frame | Increased unused RE in case of Antenna Port   = 1 per Frame | Comments                                                                                                                                                                                                                                         |
-|--------|------------------------|---------------------|-------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| PCFICH | 16                     | 160                 | 40                                                          | the additional 40 wastage should be only considered if Antenna ports =1.   As PCIFCH interleaves the CSR-RS symbols as if Antenna ports used were 2 or 4   and does not use those RE positions. These then remain unused for the PCIFH   symbols |
+**The additional 40 wastage should be only considered if Antenna ports =1.   As PCIFCH interleaves the CSR-RS symbols as if Antenna ports used were 2 or 4   and does not use those RE positions. These then remain unused for the PCIFH   symbols**
+
+| Item   | Total RE/SubFrame | Total RE/Frame | Added unused RE if SISO/Frame |
+|--------|------------------------|---------------------|-------------------------------------------------------------|
+| PCFICH | 16                     | 160                 | 40                                                          |
 
 
-### PHICH (Physical HARQ Indicator Channel)
+#### PHICH (Physical HARQ Indicator Channel)
 
 This is the guy which indicates ACK / NACK and is for individual user. It uses symbol 0 slot 0 for all subframes and uses subcarriers depending on the system bandwidth.
 
@@ -161,33 +163,34 @@ This is the guy which indicates ACK / NACK and is for individual user. It uses s
 | PHICH | 15 MHz    | 30                      | 120                   | 1200                     |
 | PHICH | 20MHz     | 39                      | 156                   | 1560                     |
 
-### PDCCH (Physical Downlink Control Channel)
+#### PDCCH (Physical Downlink Control Channel)
 
 This is where things get interesting. The PDCCH is dynamic and varies based on cell load, selected aggregation level etc. So we have a tough choice to make while assuming the overheads of PDCCH if we want to limit our analysis on theoretical settings alone. One way of doing this can be to select the number of CFIs and then calculate the PDCCH overheads. Another way can be to get the available statistics from the Network and interpolate based on CFI usage and aggregation levels used in the sites/areas.
 
 As we are still in the theoretical section, lets see the PDCCH REs based on CFI. Please note that the REGs and CCEs are not directly convertable as some part of REs are not sufficient to form a complete CCE and remain unused. We should consider this as a resource wastage in our calculation as well.
 
-| Bandwidth | CFI | PDCCH   REGs in a Frame | PDCCH   CCEs in a Frame | Unuseable   RE (REG*4-CCE*36) // These are not useable for PDCCH | Final   PDCCH+Unused RE Overheads in Frame | Comments                                     |
-|-----------|-----|-------------------------|-------------------------|------------------------------------------------------------------|--------------------------------------------|----------------------------------------------|
-| 1.4   MHz | 1   | 0                       | 0                       | 0                                                                | 0                                          | CFI=1 is   not used with 1.4 Mhz, 3Mhz, 5Mhz |
-| 1.4   MHz | 2   | 410                     | 40                      | 200                                                              | 1640                                       |                                              |
-| 1.4   MHz | 3   | 590                     | 60                      | 200                                                              | 2360                                       |                                              |
-| 3 MHz     | 1   | 0                       | 0                       | 0                                                                | 0                                          | CFI=1 is   not used with 1.4 Mhz, 3Mhz, 5Mhz |
-| 3 MHz     | 2   | 650                     | 70                      | 80                                                               | 2600                                       |                                              |
-| 3 MHz     | 3   | 1100                    | 120                     | 80                                                               | 4400                                       |                                              |
-| 5 MHz     | 1   | 0                       | 0                       | 0                                                                | 0                                          | CFI=1 is   not used with 1.4 Mhz, 3Mhz, 5Mhz |
-| 5 MHz     | 2   | 1090                    | 120                     | 40                                                               | 4360                                       |                                              |
-| 5 MHz     | 3   | 1840                    | 200                     | 160                                                              | 7360                                       |                                              |
-| 10 MHz    | 1   | 750                     | 80                      | 120                                                              | 3000                                       |                                              |
-| 10 MHz    | 2   | 2250                    | 250                     | 0                                                                | 9000                                       |                                              |
-| 10 MHz    | 3   | 3750                    | 410                     | 240                                                              | 15000                                      |                                              |
-| 15 MHz    | 1   | 1160                    | 120                     | 320                                                              | 4640                                       |                                              |
-| 15 MHz    | 2   | 3410                    | 370                     | 320                                                              | 13640                                      |                                              |
-| 15 MHz    | 3   | 5660                    | 620                     | 320                                                              | 22640                                      |                                              |
-| 20 MHz    | 1   | 1570                    | 170                     | 160                                                              | 6280                                       |                                              |
-| 20 MHz    | 2   | 4570                    | 500                     | 280                                                              | 18280                                      |                                              |
-| 20 MHz    | 3   | 7570                    | 840                     | 40                                                               | 30280                                      |                                              |
+**Overhead for 1.4/3/5MHz for CFI=1 is mentioned as zero. As per my understanding it is not possible to use CFI=1 due to insufficient Common search space CFIs. Feedback welcome for this point (aliasgherman at gmail)**
 
+| Bandwidth   (MHz) | CFI | PDCCH REGs in a   Frame | PDCCH CCEs in a   Frame | Unuseable RE | Final   PDCCH+Unused RE Overheads in Frame |
+|-------------------|-----|-------------------------|-------------------------|--------------|--------------------------------------------|
+| 1.4               | 1   | 0                       | 0                       | 0            | 0                                          |
+| 1.4               | 2   | 410                     | 40                      | 200          | 1640                                       |
+| 1.4               | 3   | 590                     | 60                      | 200          | 2360                                       |
+| 3                 | 1   | 0                       | 0                       | 0            | 0                                          |
+| 3                 | 2   | 650                     | 70                      | 80           | 2600                                       |
+| 3                 | 3   | 1100                    | 120                     | 80           | 4400                                       |
+| 5                 | 1   | 0                       | 0                       | 0            | 0                                          |
+| 5                 | 2   | 1090                    | 120                     | 40           | 4360                                       |
+| 5                 | 3   | 1840                    | 200                     | 160          | 7360                                       |
+| 10                | 1   | 750                     | 80                      | 120          | 3000                                       |
+| 10                | 2   | 2250                    | 250                     | 0            | 9000                                       |
+| 10                | 3   | 3750                    | 410                     | 240          | 15000                                      |
+| 15                | 1   | 1160                    | 120                     | 320          | 4640                                       |
+| 15                | 2   | 3410                    | 370                     | 320          | 13640                                      |
+| 15                | 3   | 5660                    | 620                     | 320          | 22640                                      |
+| 20                | 1   | 1570                    | 170                     | 160          | 6280                                       |
+| 20                | 2   | 4570                    | 500                     | 280          | 18280                                      |
+| 20                | 3   | 7570                    | 840                     | 40           | 30280                                      |
 
 
 ---
@@ -200,9 +203,10 @@ Till this point, we have collected pretty much all downlink control channel over
 
 With the available informations, we can work for Phase 1 Control Channel capacity calculations via below table. The only dynamic formula in this sheet is for the CFI. In almost all networks, CFI is dynamically modified based on PDCCH demand and for our calculations, we can incorporate this factor as well. The way to do it can be to get the CFI Usage Ratio of CFI1, CFI2 and CFI3. 
 
-Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for 
+_Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40% of the time, then the ratios would be 0.3, 0.3, 0.4 and PDCCH overheads would be calculated by using the PDCCH table above for _
 
-PDCCH Overhead = (PDCCH overhead for CFI1 * 0.3) + (PDCCH Overhead for CFI2 * 0.3) +  (PDCCH Overhead for CFI3 * 0.4) 
+**PDCCH Overhead = (PDCCH overhead for CFI1 * 0.3) + (PDCCH Overhead for CFI2 * 0.3) +  (PDCCH Overhead for CFI3 * 0.4) **
+
 
 
 | Bandwidth   (Mhz) | Antenna Ports |       RBs       |        Total RE in a   Frame       |                      CFI1 Ratio (0-1)                      | CFI2 Ratio (0 -   1) | CFI3 Ratio (0-1) | Average CFI | CRS Overheads | PDCCH Overheads | PSS/SSS Overheads | PBCH Overheads | PCFICH Overheads | Remaining PDSCH   RE in Frame |                             Important Notes                             |
