@@ -197,7 +197,7 @@ As we are still in the theoretical section, lets see the PDCCH REs based on CFI.
 
 
 
-## Conclusion to the Phase 1 Calculations
+## Combining All Together
 
 Till this point, we have collected pretty much all downlink control channel overheads and we can now estimate remaining PDSCH resources. **Beware**, this is only part 1 of the exercise as we will now need to incorporate the **scheduling** parameters into available PDSCH resources to compute available capacity.
 
@@ -209,32 +209,7 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
 
 
-| Bandwidth   (Mhz) | Antenna Ports |       RBs       |        Total RE in a   Frame       |                      CFI1 Ratio (0-1)                      | CFI2 Ratio (0 -   1) | CFI3 Ratio (0-1) | Average CFI | CRS Overheads | PDCCH Overheads | PSS/SSS Overheads | PBCH Overheads | PCFICH Overheads | Remaining PDSCH   RE in Frame |                             Important Notes                             |
-|:-----------------:|:-------------:|:---------------:|:----------------------------------:|:----------------------------------------------------------:|:--------------------:|:----------------:|:-----------:|:-------------:|:---------------:|:-----------------:|:--------------:|:----------------:|:-----------------------------:|:-----------------------------------------------------------------------:|
-|       in MHz      |  MIMO Config  | 1 Slot RB Count | RE per Symbol *   Symbol per Frame | For dynamic CFI usage, sum   of these should be equal to 1 |                      |                  |             |               |                 |                   |                |                  |                               |                                                                         |
-| 1.4               | 1             | 6               | 10080                              | 0                                                          | 1                    | 0                | 2           | 480           | 1640            | 288               | 240            | 200              | 7232                          | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 1.4               | 2             | 6               | 10080                              | 0                                                          | 1                    | 0                | 2           | 960           | 1640            | 288               | 240            | 160              | 6792                          | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 1.4               | 4             | 6               | 10080                              | 0                                                          | 1                    | 0                | 2           | 1440          | 1640            | 288               | 240            | 160              | 6312                          | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 3                 | 1             | 15              | 25200                              | 0                                                          | 1                    | 0                | 2           | 1200          | 2600            | 288               | 240            | 200              | 20672                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 3                 | 2             | 15              | 25200                              | 0                                                          | 1                    | 0                | 2           | 2400          | 2600            | 288               | 240            | 160              | 19512                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 3                 | 4             | 15              | 25200                              | 0                                                          | 1                    | 0                | 2           | 3600          | 2600            | 288               | 240            | 160              | 18312                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 5                 | 1             | 25              | 42000                              | 0                                                          | 1                    | 0                | 2           | 2000          | 4360            | 288               | 240            | 200              | 34912                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 5                 | 2             | 25              | 42000                              | 0                                                          | 1                    | 0                | 2           | 4000          | 4360            | 288               | 240            | 160              | 32952                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 5                 | 4             | 25              | 42000                              | 0                                                          | 1                    | 0                | 2           | 6000          | 4360            | 288               | 240            | 160              | 30952                         | CFI =1 for   1.4 MHz means 2 symbols. CFI =1 not used for 1.4 till 5MHz |
-| 10                | 1             | 50              | 84000                              | 0.8                                                        | 0.2                  | 0                | 1.2         | 4000          | 4200            | 288               | 240            | 200              | 75072                         |                                                                         |
-| 10                | 2             | 50              | 84000                              | 0.8                                                        | 0.2                  | 0                | 1.2         | 8000          | 4200            | 288               | 240            | 160              | 71112                         |                                                                         |
-| 10                | 4             | 50              | 84000                              | 0.8                                                        | 0.2                  | 0                | 1.2         | 12000         | 4200            | 288               | 240            | 160              | 67112                         |                                                                         |
-| 15                | 1             | 75              | 126000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 6000          | 6440            | 288               | 240            | 200              | 112832                        |                                                                         |
-| 15                | 2             | 75              | 126000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 12000         | 6440            | 288               | 240            | 160              | 106872                        |                                                                         |
-| 15                | 4             | 75              | 126000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 18000         | 6440            | 288               | 240            | 160              | 100872                        |                                                                         |
-| 20                | 1             | 100             | 168000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 8000          | 8680            | 288               | 240            | 200              | 150592                        |                                                                         |
-| 20                | 2             | 100             | 168000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 16000         | 8680            | 288               | 240            | 160              | 142632                        |                                                                         |
-| 20                | 4             | 100             | 168000                             | 0.8                                                        | 0.2                  | 0                | 1.2         | 24000         | 8680            | 288               | 240            | 160              | 134632                        |                                                                         |
-
-
-
 ---
-
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -259,7 +234,7 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
 <div class="row">
     <div class="input-field col s4">
-    <select>
+    <select id="bandwidth_select">
       <option value="1.4">1.4</option>
       <option value="3">3</option>
       <option value="5">5</option>
@@ -270,8 +245,8 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
     <label>Select Bandwidth (MHz)</label>
     </div>
 
-    <div class="input-field col s4">
-    <select>
+    <div class="input-field col s4" >
+    <select id="antenna_select">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="4">4</option>
@@ -280,7 +255,7 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
     </div>
 
     <div class="input-field col s4">
-        <a class="waves-effect waves-light btn" id="calculate_control_overheads" onclick="calc_overheads">Calculate Overheads</a>
+        <a class="waves-effect waves-light btn" id="calculate_control_overheads" onclick="calc_overheads()">Calculate Overheads</a>
     </div>
 
 </div>
@@ -291,11 +266,142 @@ _Assume, CFI1 was used 30% of the times, CFI2 was used 30% and CFI3 was used 40%
 
 window.onload = function() {
   M.AutoInit();
+  console.log("Page loaded");
 }
 
 function calc_overheads() {
-    var message_call = "<b>Overheads Calculated</b><br/>CRS<br/><PDCCH></br>";
-    M.toast({html: message_call});
+	console.log("Inside the function");
+	var cfi1 = document.getElementById("cfi1_usage").valueAsNumber;
+	var cfi2 = document.getElementById("cfi2_usage").valueAsNumber;
+	var cfi3 = document.getElementById("cfi3_usage").valueAsNumber;
+	console.log(cfi1+cfi2+cfi3);
+	
+	var numantenna = document.getElementById("antenna_select").value;
+	var bandwidth = document.getElementById("bandwidth_select").value;
+	
+	console.log(numantenna);
+	console.log(bandwidth);
+	
+	if (cfi1 < 0 || cfi1 > 1) {
+		M.toast({html: "<div><B>ERROR</B><br /> CFI1 Usage should be a number between 0 to 1</div>", classes: 'rounded'});
+		return;
+	}
+	if (cfi2 < 0 || cfi2 > 1) {
+		M.toast({html: "<div><B>ERROR</B><br /> CFI2 Usage should be a number between 0 to 1</div>", classes: 'rounded'});
+		return;
+	}
+	if (cfi3 < 0 || cfi3 > 1) {
+		M.toast({html: "<div><B>ERROR</B><br /> CFI3 Usage should be a number between 0 to 1</div>", classes: 'rounded'});
+		return;
+	}
+	if ( (cfi1 + cfi2 + cfi3).toFixed(2) != 1.0) {
+		M.toast({html: "<div><B>ERROR</B><br /> CFI1 + CFI2 + CFI3 usage should add upto 1</div>", classes: 'rounded'});
+		return;
+	}
+	
+	if ((numantenna != 1) && (numantenna != 2) && (numantenna != 4)) {
+		M.toast({html: "<div><B>ERROR</B><br /> Num antennas should be 1,2,4</div>", classes: 'rounded'});
+		return;	
+	}
+	
+	if (bandwidth != 1.4 && bandwidth != 3 && bandwidth != 5 && bandwidth != 10 && bandwidth != 10 && bandwidth != 15 && bandwidth != 20) {
+		M.toast({html: "<div><B>ERROR</B><br /> Bandwidth should be 1.4, 3, 5, 10, 15 or 20MHz</div>", classes: 'rounded'});
+		return;	
+	}	
+	if ((bandwidth < 10) && (cfi1 > 0)) {
+		M.toast({html: "<div><B>ERROR</B><br /> For bandwidths 1.4, 3 & 5, please keep CFI1 Usage=0 and use only CFI2+CFI3 values such that CFI2+CFI3=1.0</div>", classes: 'rounded'});
+		return;		
+	}
+	
+	var rb_in_slot = 6;
+	if (bandwidth == 1.4) rb_in_slot = 6;
+	if (bandwidth == 3) rb_in_slot = 15;
+	if (bandwidth == 5) rb_in_slot = 25;
+	if (bandwidth == 10) rb_in_slot = 50;
+	if (bandwidth == 15) rb_in_slot = 75;
+	if (bandwidth == 20) rb_in_slot = 100;
+	
+	var re_in_frame_exc_mimo = rb_in_slot * 12 * 10 * 14;
+	var avg_cfi = cfi1 * 1 + cfi2 * 2 + cfi3 * 3;
+	
+	var crs_overheads = 0;
+	if (bandwidth == 1.4) crs_overheads = 480;
+	if (bandwidth == 3) crs_overheads = 1200;
+	if (bandwidth == 5) crs_overheads = 2000;
+	if (bandwidth == 10) crs_overheads = 4000;
+	if (bandwidth == 15) crs_overheads = 6000;
+	if (bandwidth == 20) crs_overheads = 8000;
+	crs_overheads = crs_overheads * numantenna;
+	
+	var pss_sss_overhead = 288;
+	var pbch_overhead = 240;
+	
+	var pcfich_overhead = 160;
+	if (numantenna == 1) pcfich_overhead = 200; //additional overheads as PBCH considers interleaving like 2/4 port antennas
+	
+	var phich_overhead = 120;
+	if (bandwidth == 1.4) phich_overhead = 120;	
+	if (bandwidth == 3) phich_overhead = 240;	
+	if (bandwidth == 5) phich_overhead = 480;	
+	if (bandwidth == 10) phich_overhead = 840;	
+	if (bandwidth == 15) phich_overhead = 1200;	
+	if (bandwidth == 20) phich_overhead = 1560;	
+
+	var pdcch_overhead_cfi1 = 0;
+	if (bandwidth == 1.4) pdcch_overhead_cfi1 = 0;
+	if (bandwidth == 3) pdcch_overhead_cfi1 = 0;
+	if (bandwidth == 5) pdcch_overhead_cfi1 = 0;
+	if (bandwidth == 10) pdcch_overhead_cfi1 = 3000;
+	if (bandwidth == 15) pdcch_overhead_cfi1 = 4640;
+	if (bandwidth == 20) pdcch_overhead_cfi1 = 6280;
+	
+	var pdcch_overhead_cfi2 = 0;
+	if (bandwidth == 1.4) pdcch_overhead_cfi2 = 1640;
+	if (bandwidth == 3) pdcch_overhead_cfi2 = 2600;
+	if (bandwidth == 5) pdcch_overhead_cfi2 = 4360;
+	if (bandwidth == 10) pdcch_overhead_cfi2 = 9000;
+	if (bandwidth == 15) pdcch_overhead_cfi2 = 13640;
+	if (bandwidth == 20) pdcch_overhead_cfi2 = 18280;
+	
+	var pdcch_overhead_cfi3 = 0;
+	if (bandwidth == 1.4) pdcch_overhead_cfi3 = 2360;
+	if (bandwidth == 3) pdcch_overhead_cfi3 = 4400;
+	if (bandwidth == 5) pdcch_overhead_cfi3 = 7360;
+	if (bandwidth == 10) pdcch_overhead_cfi3 = 15000;
+	if (bandwidth == 15) pdcch_overhead_cfi3 = 22640;
+	if (bandwidth == 20) pdcch_overhead_cfi3 = 30280;	
+	
+	var pdcch_overhead = pdcch_overhead_cfi1 * cfi1 + pdcch_overhead_cfi2 * cfi2 + pdcch_overhead_cfi3 * cfi3;
+	
+	var pdsch_remaining_wo_mimo = re_in_frame_exc_mimo - (crs_overheads + pdcch_overhead + pss_sss_overhead + pbch_overhead + pcfich_overhead + phich_overhead);
+	var pdsch_remaining_with_mimo = pdsch_remaining_wo_mimo * numantenna;
+	
+	var output_table = "<table>";
+	output_table += '<tr><th>Remaining PDSCH RE in Frame (w/o MIMO)</th><td>' + pdsch_remaining_wo_mimo + '</td></tr>' ;
+	output_table += '<tr><th>Remaining PDSCH RE in Frame (with MIMO)</th><td>' + pdsch_remaining_with_mimo + '</td></tr>' ;	
+	output_table += '<tr><th>Bandwidth (Mhz)</th><td>' + bandwidth + '</td></tr>' ;
+	output_table += '<tr><th>Antenna Ports</th><td>' + numantenna + '</td></tr>' ;
+	output_table += '<tr><th>RBs</th><td>' + rb_in_slot + '</td></tr>' ;
+	output_table += '<tr><th>Total RE in a Frame (w/o MIMO)</th><td>' + re_in_frame_exc_mimo + '</td></tr>' ;
+	output_table += '<tr><th>CFI1 Ratio (0-1)</th><td>' + cfi1 + '</td></tr>' ;
+	output_table += '<tr><th>CFI2 Ratio (0 - 1)</th><td>' + cfi2 + '</td></tr>' ;
+	output_table += '<tr><th>CFI3 Ratio (0-1)</th><td>' + cfi3 + '</td></tr>' ;
+	output_table += '<tr><th>Average CFI</th><td>' + avg_cfi + '</td></tr>' ;
+	output_table += '<tr><th>CRS Overheads</th><td>' + crs_overheads + '</td></tr>' ;
+	output_table += '<tr><th>PDCCH Overheads</th><td>' + pdcch_overhead + '</td></tr>' ;
+	output_table += '<tr><th>PSS/SSS Overheads</th><td>' + pss_sss_overhead + '</td></tr>' ;
+	output_table += '<tr><th>PBCH Overheads</th><td>' + pbch_overhead + '</td></tr>' ;
+	output_table += '<tr><th>PCFICH Overheads</th><td>' + pcfich_overhead + '</td></tr>' ;
+	output_table += '<tr><th>PHICH Overheads</th><td>' + phich_overhead + '</td></tr>' ;
+	output_table += "</table>";
+
+	var output_message = "<div class='teal lighten-4'> " + output_table + " </div>"; 
+	
+
+
+	
+	
+    M.toast({html: output_message, classes: 'rounded', displayLength: 10000});
 }
   
 </script>
