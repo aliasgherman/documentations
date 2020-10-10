@@ -9,7 +9,6 @@ Please note that all parameters like Usage or Ratio are to be provided between 0
 I would appreciate any feedback or questions aliasgherman at gmail
 
 
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -284,7 +283,7 @@ function calc_overheads() {
 	console.log(rank_efficiency);
 	console.log((1 - ibler));
 	
-	var rank_efficiency = 0;
+	var rank_efficiency = (1 * (1 - rank2 - rank3 - rank4) ); //Rank1 efficiency percentage
 	if (rank2 > 0) {
 		rank_efficiency += (2 * rank2);
 	}
@@ -293,7 +292,7 @@ function calc_overheads() {
 	}
 	if (rank4 > 0) {
 		rank_efficiency += (4 * rank4);
-	}	
+	}
 	
 	var cell_capacity = (100 * pdsch_remaining_wo_mimo) * efficiency * rank_efficiency * (1 - ibler) / 1024 / 1024;
 	cell_capacity = cell_capacity.toFixed(2);
@@ -333,7 +332,7 @@ function calc_overheads() {
 	output_table += '<tr><th>PHICH Overheads</th><td>' + phich_overhead + '</td></tr>' ;
 	output_table += "</table>";
 
-	var output_message = "<div> " + output_table + " </div>"; 
+	var output_message = "<div class='blue lighten-4'> " + output_table + " </div>"; 
 	
 
 
