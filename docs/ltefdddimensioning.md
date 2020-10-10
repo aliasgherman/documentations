@@ -357,11 +357,12 @@ If we explore these tables, we will see that efficiency is almost a linear funct
 
 Considering that you did read the above paragraph, the final Cell Capacity would be calculated as,
 
-	Cell Capacity (Mbps) = (100) * n_re_pdsch_wo_mimo x n_efficiency x (2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) x (1 - IBLER_Ratio) / 1024 / 1024
+	Cell Capacity (Mbps) = (100) * n_re_pdsch_wo_mimo x n_efficiency x (1 * (1 - Rank2_Ratio - Rank3_Ratio - Rank4_Ratio) + 2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) x (1 - IBLER_Ratio) / 1024 / 1024
 	
 	* 100 multiplication is there because we calculated PDSCH RE for 1 frame. There are 100 frames in a second. (1000 TTIs).
 
-4* Rank4_Ratio can be understood by considering that if a cell carries 100% traffic with Rank4, then this term would become (4*1) giving a capacity 4 times the PDSCH RE resources (as we are considering the PDSCH resources without MIMO).  
+**(1 * (1 - Rank2_Ratio - Rank3_Ratio - Rank4_Ratio) + 2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) : This term is trying to calculate the usage of Rank1 and others and then multiplies the gain with the capacity considering that Rank2 essentially means double the capacity and so on.**
+
 
 **Phew**. This was too much indeed. You have now earned the right to go to the [LTEFDD-Capacity Calculator](ltefdd-capacitycalculator.md) and perform capacity calculations. 
 
