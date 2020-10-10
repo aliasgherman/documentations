@@ -287,6 +287,7 @@ Well, MAC layer is tough. Just like life. Not all packets are decoded the first 
 Lets first put down the CQI-MCS tables below.
 
 **Table 1 - 64QAM**
+
 | CQI index |  modulation  | code rate x 1024 | efficiency |
 |:---------:|:------------:|:----------------:|:----------:|
 |     0     | out of range |                  |            |
@@ -307,6 +308,7 @@ Lets first put down the CQI-MCS tables below.
 |     15    |     64QAM    |        948       |   5.5547   |
 
 **Table 1 - 256QAM**
+
 | CQI index |  modulation  | code rate x 1024 | efficiency |
 |:---------:|:------------:|:----------------:|:----------:|
 |     0     | out of range |                  |            |
