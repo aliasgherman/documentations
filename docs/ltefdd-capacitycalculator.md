@@ -333,7 +333,7 @@ function calc_overheads() {
 	output_table += '<tr><th>PHICH Overheads</th><td>' + phich_overhead + '</td></tr>' ;
 	output_table += "</table>";
 
-	var output_message = "<div class='blue lighten-4'> " + output_table + " </div>"; 
+	var output_message = "<div> " + output_table + " </div>"; 
 	
 
 
