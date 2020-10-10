@@ -126,12 +126,12 @@ Another table just for the sake of completeness. Below refers to the number of R
 ---
 
 
-### Overhead Calculations
+## Overhead Calculations
 
 ---
 
 
-#### CSI-RS (Cell specific reference signals)
+### CSI-RS (Cell specific reference signals)
 
 These symbols are the easiest to undestand as they provide the reference mathematical equations for the user. These are used by the UE to determine the RSRP and channel conditions. A specific number of REs are transmitted as CSI-RS and based on number of Antenna ports, there are certain REs on certain Antenna ports which remain as unused. The below table can be used to calculate this overhead.
 
@@ -159,7 +159,7 @@ These symbols are the easiest to undestand as they provide the reference mathema
 ---
 
 
-#### PBCH (Physical Broadcast Channel)
+### PBCH (Physical Broadcast Channel)
 
 PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the REs which should transmit CSI-RS in these areas, they shall not be mapped for PBCH. So, that overhead should be subtracted to not count it twice (once as CSI-RS and then as PBCH).
 
@@ -171,7 +171,7 @@ PBCH will use 72 subcarriers and will utilize slot1 symbol 0, 1, 2, 3. For the R
 ---
 
 
-#### PSS/SSS (Synchronization Signals)
+### PSS/SSS (Synchronization Signals)
 
 They are the PCI carriers. Everyone knows about them, other signals want to be them. They also occupy 72 subcarriers (they use 62 and keep 10 as their buffer of unused RE) and in time domain they occur once in a half-frame. (5ms period).
 
@@ -183,7 +183,7 @@ They are the PCI carriers. Everyone knows about them, other signals want to be t
 ---
 
 
-#### PCFICH (Physical Control Format Indicator Channel)
+### PCFICH (Physical Control Format Indicator Channel)
 
 It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS space as unused but treats the CSI symbol locations as if used Antenna ports were greater than 1. So an additional overhead per frame should be considered for this case as mentioned in below table.
 
@@ -197,7 +197,7 @@ It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS sp
 ---
 
 
-#### PHICH (Physical HARQ Indicator Channel)
+### PHICH (Physical HARQ Indicator Channel)
 
 This is the guy which indicates ACK / NACK and is for individual user. It uses symbol 0 slot 0 for all subframes and uses subcarriers depending on the system bandwidth.
 
@@ -213,7 +213,7 @@ This is the guy which indicates ACK / NACK and is for individual user. It uses s
 ---
 
 
-#### PDCCH (Physical Downlink Control Channel)
+### PDCCH (Physical Downlink Control Channel)
 
 This is where things get interesting. The PDCCH is dynamic and varies based on cell load, selected aggregation level etc. So we have a tough choice to make while assuming the overheads of PDCCH if we want to limit our analysis on theoretical settings alone. One way of doing this can be to select the number of CFIs and then calculate the PDCCH overheads. Another way can be to get the available statistics from the Network and interpolate based on CFI usage and aggregation levels used in the sites/areas.
 
