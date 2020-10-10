@@ -25,8 +25,8 @@
 
 - I shall try to divide this text into **three** parts.
     1. Theoretical background and calculations **Read if you want to extend this documentation and want to gain a deeper understanding on the rationale**
-    2. Defining required input statistics **Read if you are planning to use this model for your own network**
-    3. Practical Modelling **Just read directly if you dont want to go theoretical and would like to check the practical impact only**
+    2. Phase1 calculations which are to calculate overheads of the Control Channels only **Read this for improving Control Channel Overhead knowledge**
+    3. Phase2 calculations which include Control Channel and RF condition overheads to provide final Cell Capacity **This is the final product. It would require some inputs preferrably from your experience of Live network like IBLER, Rank4 ratio etc.**
 
 
 ---
