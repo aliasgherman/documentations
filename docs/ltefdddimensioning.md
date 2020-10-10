@@ -183,7 +183,7 @@ They are the PCI carriers. Everyone knows about them, other signals want to be t
 ---
 
 
-### PCFICH (Physical Control Format Indicator Channel)
+#### PCFICH (Physical Control Format Indicator Channel)
 
 It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS space as unused but treats the CSI symbol locations as if used Antenna ports were greater than 1. So an additional overhead per frame should be considered for this case as mentioned in below table.
 
