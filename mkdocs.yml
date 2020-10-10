@@ -1,4 +1,11 @@
-site_name: My Docs
+site_name: AAM's Documentations
+site_description: LTE Capacity Dimensioning, LTE Documentation, Capacity Calculation, LTE Calculator
+site_author: Ali Asgher Mansoor Habiby
+google_analytics: ['UA-57266485-4', 'https://aliasgherman.github.io/documentations']
+nav:
+    - Introduction: 'docs/index.md'
+    - 'LTE Capacity Dimensioning': 'docs/ltefdddimensioning.md'
+    - 'LTE Capacity Calculator': 'docs/ltefdd-capacitycalculator.md'
 theme:
     name: readthedocs
     highlightjs: true
