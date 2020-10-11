@@ -9,6 +9,7 @@ Please note that all parameters like Usage or Ratio are to be provided between 0
 I would appreciate any feedback or questions aliasgherman at gmail
 
 
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -213,7 +214,13 @@ function calc_overheads() {
 	if (bandwidth == 10) crs_overheads = 4000;
 	if (bandwidth == 15) crs_overheads = 6000;
 	if (bandwidth == 20) crs_overheads = 8000;
-	crs_overheads = crs_overheads * numantenna;
+	
+	if (numantenna == 4) {
+		crs_overheads = crs_overheads * 3;
+	}
+	else {
+		crs_overheads = crs_overheads * numantenna;
+	}
 	
 	var pss_sss_overhead = 288;
 	var pbch_overhead = 240;
