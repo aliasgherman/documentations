@@ -101,6 +101,23 @@ I would appreciate any feedback or questions aliasgherman at gmail
 </div>
 
 <div class="row">
+    <div class="input-field col s12 m6 l6" >
+    <select id="mbsfn_usage">
+      <option value="0" selected>0</option>
+      <option value="0.5">0.5</option>
+      <option value="1" >1</option>
+	  <option value="2" >2</option>
+	  <option value="3" >3</option>
+	  <option value="4" >4</option>
+	  <option value="5" >5</option>
+	  <option value="6" >6</option>
+    </select>
+    <label>Select MBSFN DSS Subframes in a Frame</label>
+    </div>
+</div>
+
+
+<div class="row">
     <div class="input-field col s12 m6 l6">
         <a class="waves-effect waves-light btn" id="calculate_control_overheads" onclick="calc_overheads()">Calculate Overheads</a>
     </div>
@@ -131,10 +148,12 @@ function calc_overheads() {
 	var ibler = document.getElementById("ibler_ratio").valueAsNumber;
 	var qam256 = document.getElementById("qam256_ratio").valueAsNumber;
 	
-	console.log(cfi1+cfi2+cfi3);
+	
+	console.log(cfi1 + cfi2 + cfi3);
 	
 	var numantenna = document.getElementById("antenna_select").value;
 	var bandwidth = document.getElementById("bandwidth_select").value;
+	var mbsfn = document.getElementById("mbsfn_usage").value;
 	
 	console.log(numantenna);
 	console.log(bandwidth);
@@ -262,7 +281,11 @@ function calc_overheads() {
 	
 	var pdcch_overhead = pdcch_overhead_cfi1 * cfi1 + pdcch_overhead_cfi2 * cfi2 + pdcch_overhead_cfi3 * cfi3;
 	
-	var pdsch_remaining_wo_mimo = re_in_frame_exc_mimo - (crs_overheads + pdcch_overhead + pss_sss_overhead + pbch_overhead + pcfich_overhead + phich_overhead);
+	var mbsfn_overhead = (mbsfn / 10) * (re_in_frame_exc_mimo) - ((crs_overheads + pdcch_overhead + pcfich_overhead + phich_overhead) / 10) * mbsfn;
+	
+	console.log("MBSFN Overheads " + mbsfn_overhead);
+	
+	var pdsch_remaining_wo_mimo = re_in_frame_exc_mimo - (crs_overheads + pdcch_overhead + pss_sss_overhead + pbch_overhead + pcfich_overhead + phich_overhead + mbsfn_overhead);
 	var pdsch_remaining_with_mimo = pdsch_remaining_wo_mimo * numantenna;
 	
 	
@@ -331,6 +354,7 @@ function calc_overheads() {
 	output_table += '<tr><th>CFI2 Ratio (0 - 1)</th><td>' + cfi2 + '</td></tr>' ;
 	output_table += '<tr><th>CFI3 Ratio (0-1)</th><td>' + cfi3 + '</td></tr>' ;
 	output_table += '<tr><th>Average CFI</th><td>' + avg_cfi + '</td></tr>' ;
+	output_table += '<tr><th>MBSFN Overheads</th><td>' + mbsfn_overhead + '</td></tr>' ;
 	output_table += '<tr><th>CRS Overheads</th><td>' + crs_overheads + '</td></tr>' ;
 	output_table += '<tr><th>PDCCH Overheads</th><td>' + pdcch_overhead + '</td></tr>' ;
 	output_table += '<tr><th>PSS/SSS Overheads</th><td>' + pss_sss_overhead + '</td></tr>' ;
