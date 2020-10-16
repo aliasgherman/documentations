@@ -262,9 +262,9 @@ Another possibility for **DSS** is to utilize Rate Matching (LTE **CRS** rate ma
 
 During a radio frame, we may define between **0 to 6** MBSFN subframes. When a MBSFN subframe is transmitted, we still have the control channel transmissions happening on the symbols based on the CFI. As most implementations will always have variable CFIs for any subframe, this is not different as well. So we can potentially have different number of CFI symbols in a MBSFN subframe vs. others. We have already covered this point via the CFI1, CFI2, CFI3 usage ratio in our calculations.
 
-![MBSFN Subframe Example](/img/MBSFNSubframeExample.png?raw=true)
+![MBSFN Subframe Example](/docs/img/MBSFNSubframeExample.png?raw=true)
 
-![Legends](/img/MBSFNLegend.png?raw=true)
+![Legends](/docs/img/MBSFNLegend.png?raw=true)
 
 Hence, for MBSFN based DSS, our inputs are the number of MBSFN subframes in a Radio Frame only. We will then have to make sure we dont count the overheads which we have taken for all other control channels once again for these subframes.
 
@@ -289,11 +289,11 @@ The way we can apply this scheduling loss to our calculations is as follows
 >> MBSFN Overheads in a frame = (1 / 10) * (100 * 12 * 14 * 10) - {(1560 + 160 + 6280 + 24000)} / 10 * (1)
 >> MBSFN Overheads in a frame = 13600 RE
 
-![MBSFN Config vs. Overheads - Normal Graph](/img/MBSFN_CapacityImpact_Normal.png?raw=true)
+![MBSFN Config vs. Overheads - Normal Graph](/docs/img/MBSFN_CapacityImpact_Normal.png?raw=true)
 
 Same plot with Logarithmic capacity scale
 
-![MBSFN Config vs. Overheads - Logarithmic Graph](/img/MBSFN_CapacityImpact_Logarithmic.png?raw=true)
+![MBSFN Config vs. Overheads - Logarithmic Graph](/docs/img/MBSFN_CapacityImpact_Logarithmic.png?raw=true)
 
 ### Non-MBSFN Based DSS
 
@@ -385,7 +385,7 @@ Lets first put down the CQI-MCS tables below.
 
 If we explore these tables, we will see that efficiency is almost a linear function of CQI for both tables. Indeed, 256QAM pushes the efficiency higher quicker compared to 64QAM. The tradeoff is that with such implementations, if a scheduler pushes for 256QAM more and more, the block error rates will also increase due to the increased interference (256QAM will have higher power requirements due to 256 I/Q combinations and without higher power these will be extremely close to each other causing decoding errors).
 
-![CQI vs. Efficiency Curve](/img/256QAM.jpg?raw=true)
+![CQI vs. Efficiency Curve](/docs/img/256QAM.jpg?raw=true)
 
 ## Phase 2 - Calculations
 
