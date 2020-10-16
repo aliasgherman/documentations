@@ -16,7 +16,8 @@
 
 
 
-- This text is aimed to understand the **LTE-FDD** capacity calculations. These are without DSS enabled
+- This text is aimed to understand the **LTE-FDD** capacity calculations. <s>These are without DSS enabled</s>. 
+> **DSS based overhead** calculations are also part of the document
 - The text shall try to explain how a future Traffic forecast can be translated into required resources based on **Statistics** and Observations from current Live Network.
 - Essentially, this is a **practical dimensioning** exercise and **not** a theoretical one. Difference in both approaches is that for theoretical discussion, we assume a certain overhead for all our channels and work towards building the right model, whereas for practical dimensioning we shall get all these inputs via the available Statistics and plugin to our model to get desired results.
 
@@ -87,7 +88,7 @@ In simplest term, we shall work our way to list down the overall available resou
 
 ### RB vs. RE
 
-A *Resource Block (RB)* is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
+A **Resource Block (RB)** is the smallest unit which can be allocated to a user. A Resource Element is the smallest unit representing physical layer data. Our overheads are generally calculated in terms of Resource Elements and then overall number of wasted RBs are gathered to understand overall system throughput capacity.
 
 | Parameter          | Frequency   Domain (Khz) | Time   Domain Symbols (Normal vs. Extended CP) | Time   Domain (ms) (Normal vs. Extended)   |
 |--------------------|--------------------------|------------------------------------------------|--------------------------------------------|
@@ -187,7 +188,7 @@ They are the PCI carriers. Everyone knows about them, other signals want to be t
 
 It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS space as unused but treats the CSI symbol locations as if used Antenna ports were greater than 1. So an additional overhead per frame should be considered for this case as mentioned in below table.
 
-**The additional 40 wastage should be only considered if Antenna ports =1.   As PCIFCH interleaves the CSR-RS symbols as if Antenna ports used were 2 or 4   and does not use those RE positions. These then remain unused for the PCIFH   symbols**
+>The additional 40 wastage should be only considered if Antenna ports =1.   As PCIFCH interleaves the CSR-RS symbols as if Antenna ports used were 2 or 4   and does not use those RE positions. These then remain unused for the PCIFH symbols
 
 | Item   | Total RE/SubFrame | Total RE/Frame | Added unused RE if SISO/Frame |
 |--------|------------------------|---------------------|-------------------------------------------------------------|
@@ -199,7 +200,13 @@ It uses 16 REs on symbol 0 for 1st slot of the subframe. It treats the CSI-RS sp
 
 ### PHICH (Physical HARQ Indicator Channel)
 
-This is the guy which indicates ACK / NACK and is for individual user. It uses symbol 0 slot 0 for all subframes and uses subcarriers depending on the system bandwidth.
+This is the guy which indicates ACK / NACK and is for individual user. It uses symbol 0 slot 0 for all subframes and uses subcarriers depending on the system bandwidth. There are different configuraitons for the *Normal* PHICH which are defined by the Number of Groups (Ng) parameter. However, even if we change this setting, the overheads will remain the same as the unused PHICH shall be transfered to PDCCH overheads in that case. 
+
+Hence, for easier mapping, below overheads for PHICH should be fine for our calculation. There is a special case where PHICH configuration can be extended which can be only used with higher CFIs for PDCCH. This seemed over-complication and so I decided to not include this in the table.
+
+> In case you are interested, with **Extended** PHICH, the CFI used will also be 3 for all Bandwidths, and 2 or 3 for 1.4 MHz. 
+>> Remember for 1.4MHz, Number of PDCCH symbols is CFI + 1 but for others, it is simply CFI
+
 
 | Item  | Bandwidth | PHICH REGs per subframe | PHICH RE per subframe | PHICH RE per Radio Frame |
 |-------|-----------|-------------------------|-----------------------|--------------------------|
@@ -219,7 +226,7 @@ This is where things get interesting. The PDCCH is dynamic and varies based on c
 
 As we are still in the theoretical section, lets see the PDCCH REs based on CFI. Please note that the REGs and CCEs are not directly convertable as some part of REs are not sufficient to form a complete CCE and remain unused. We should consider this as a resource wastage in our calculation as well.
 
-**Overhead for 1.4/3/5MHz for CFI=1 is mentioned as zero. As per my understanding it is not possible to use CFI=1 due to insufficient Common search space CFIs. Feedback welcome for this point (aliasgherman at gmail)**
+> Overhead for 1.4/3/5MHz for CFI=1 is mentioned as zero. As per my understanding it is not possible to use CFI=1 due to insufficient Common search space CFIs. Feedback welcome for this point (aliasgherman at gmail)
 
 | Bandwidth   (MHz) | CFI | PDCCH REGs in a   Frame | PDCCH CCEs in a   Frame | Unuseable RE | Final   PDCCH+Unused RE Overheads in Frame |
 |-------------------|-----|-------------------------|-------------------------|--------------|--------------------------------------------|
@@ -245,6 +252,55 @@ As we are still in the theoretical section, lets see the PDCCH REs based on CFI.
 
 ---
 
+## Dynamic Spectrum Sharing (LTE/NR)
+
+DSS complicates the calculations. Luckily, the calculations for LTE are a bit easier to understand compared to the overheads on the NR side. DSS can be implemented via **MBSFN** and **Non-MBSFN** methods. MBSFN was introduced in LTE for eMBMS which is a method to have multi-cast data (think of it like TV broadcast). The way MBSFN works is that the cell signals the MBSFN configurations and the UE understand that for these specific subframes, the resources will be used for eMBMBS. This is useful as for the **Dynamic Spectrum Sharing** between LTE and NR, we can utilize these MBSFN frames as our NR signal without disturbing any non-NR legacy LTE UE.
+
+Another possibility for **DSS** is to utilize Rate Matching (LTE **CRS** rate matching to transmit NR). MBSFN based DSS can also support a NR SCS of either 15 or 30KHz, however the non-MBSFN based DSS may only allow **30Khz SCS** for NR due to limit on non-consecutive symbol availability. (Higher SCS will compress NR so it will be able to transmit 4 consecutive symbols which are required for the NR SSB. These 4 NR symbols will actually take up the sapce of 2 symbols on LTE side.)
+
+### MBSFN Based DSS
+
+During a radio frame, we may define between **0 to 6** MBSFN subframes. When a MBSFN subframe is transmitted, we still have the control channel transmissions happening on the symbols based on the CFI. As most implementations will always have variable CFIs for any subframe, this is not different as well. So we can potentially have different number of CFI symbols in a MBSFN subframe vs. others. We have already covered this point via the CFI1, CFI2, CFI3 usage ratio in our calculations.
+
+![MBSFN Subframe Example](/docs/img/MBSFNSubframeExample.png?raw=true)
+
+![Legends](/docs/img/MBSFNLegend.png?raw=true)
+
+Hence, for MBSFN based DSS, our inputs are the number of MBSFN subframes in a Radio Frame only. We will then have to make sure we dont count the overheads which we have taken for all other control channels once again for these subframes.
+
+| Number of MBSFN Subframes in a Frame | Comments         | LTE Capacity Loss (%) |
+|--------------------------------------|------------------|-----------------------|
+| 0.5                                  | 1 MBSFN in 20 ms | 5                     |
+| 1                                    | 1 MBSFN in 10 ms | 10                    |
+| 2                                    | 2 MBSFN in 10 ms | 20                    |
+| 3                                    | 3 MBSFN in 10 ms | 30                    |
+| 4                                    | 4 MBSFN in 10 ms | 40                    |
+| 5                                    | 5 MBSFN in 10 ms | 50                    |
+| 6                                    | 6 MBSFN in 10 ms | 60                    |
+
+The way we can apply this scheduling loss to our calculations is as follows
+
+> (MBSFN Subframe in a Frame)/10 * (RBs * 12 * 14 * 10)  - {(PHICH Overheads in Frame+ PCFICH Overheads in Frame+ PDCCH Overheads in Frame+ CRS Overheads in Frame) / 10} * (MBSFN Subframe in a Frame)
+>> Example: for 20MHz, 4 Port Antenna, 
+>> 	RB = 100
+>>	MBSFN Subframe in a Frame = 1
+>>	CFI1 = 100%, CFI2 = 0, CFI3 = 0, Average CFI = 1
+>> 		CRS Overheads = 24000, PDCCH Overheads = 6280, PHICH Overheads = 1560, PCFICH Overheads =160
+>> MBSFN Overheads in a frame = (1 / 10) * (100 * 12 * 14 * 10) - {(1560 + 160 + 6280 + 24000)} / 10 * (1)
+>> MBSFN Overheads in a frame = 13600 RE
+
+![MBSFN Config vs. Overheads - Normal Graph](/docs/img/MBSFN_CapacityImpact_Normal.png?raw=true)
+
+Same plot with Logarithmic capacity scale
+
+![MBSFN Config vs. Overheads - Logarithmic Graph](/docs/img/MBSFN_CapacityImpact_Logarithmic.png?raw=true)
+
+### Non-MBSFN Based DSS
+
+These overheads will be definitely less compared to MBSFN based DSS but difficult to compute due to dynamic nature of traffic. 
+
+// TODO: Add details here
+
 
 ## Phase 2 - PDSCH RE to Capacity
 
@@ -267,9 +323,9 @@ This is simplest to understand. It signifies the total available REs which we ca
 This value from 0 - 1 will indicate how much traffic uses 256QAM modulation scheme. 3GPP 36.213 specifies two CQI to MCS tables alongwith the Code Rate (amount of information bits + amount of redundant bits) / (transport block size in bits). The first table is utilized when reported CQI mapping is for scenarios without 256QAM usage and the second table is when 256QAM is used. For our calculations, we use these tables like below
 
 > calculated_efficiency = 64qam_efficiency_table_for_cqi_X * (1 - 256QAM_Ratio) + 256qam_efficiency_table_for_cqi_X * (256QAM_Ratio)
->	Where,
->		64qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-1 for CQI = X
->		256qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-2 for CQI = X
+>   Where,
+>       64qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-1 for CQI = X
+>       256qam_efficiency_table_for_cqi_X is the interpolated value of efficiency from 3gpp Table 7.2.3-2 for CQI = X
 
 ### Rank2 , 4 Ratio
 
@@ -333,37 +389,35 @@ If we explore these tables, we will see that efficiency is almost a linear funct
 
 ## Phase 2 - Calculations
 
-	Assume,
-		Remaining RE for PDSCH (WITHOUT CONSIDERING MIMO GAIN) = n_re_pdsch_wo_mimo
-		IBLER_Ratio = 0.12 //12% Initial block error rate
-		CQI = 10.3 //Average CQI values in cell
-		Rank2_Ratio = 0.45 //45% Rank2 PRB Usage. 
-		Rank3_Ratio = 0.05 //
-		Rank4_Ratio = 0.02 //2% Rank4 PRB Usage.
-		256QAM_Usage = 0.09 //9% 256QAM Usage in the cell
-	
-	Then,
-		We need to first interpolate the CQI to MCS table for non integer values. This means we have to calculate the Efficiency Factor for both Table1 and Table 2 for a CQI value of 10.3 (as given in our input parameters above).
-		
-		Table1
-		CQI = 10 Efficiency_EF1: 2.7305, CQI = 11 Efficiency_EF2: 3.3223
-		For CQI = 10.3, 
-			Efficiency = (Efficiency_EF2 - Efficiency_EF1) * (10.3 - 10) + Efficiency_EF1
-		
-		The above formula is simply considering the slope of line formula (y = mx + b), and trying to add the efficiency of CQI=10 and then adding the efficiency based on the slope between efficiency of CQI 11 and CQI 10.
-		
-		n_efficiency = Efficiency_table1 * (1 - 256QAM_Usage) + Efficiency_table2 * (256QAM_Usage)
-		
+    Assume,
+        Remaining RE for PDSCH (WITHOUT CONSIDERING MIMO GAIN) = n_re_pdsch_wo_mimo
+        IBLER_Ratio = 0.12 //12% Initial block error rate
+        CQI = 10.3 //Average CQI values in cell
+        Rank2_Ratio = 0.45 //45% Rank2 PRB Usage. 
+        Rank3_Ratio = 0.05 //
+        Rank4_Ratio = 0.02 //2% Rank4 PRB Usage.
+        256QAM_Usage = 0.09 //9% 256QAM Usage in the cell
+    
+    Then,
+        We need to first interpolate the CQI to MCS table for non integer values. This means we have to calculate the Efficiency Factor for both Table1 and Table 2 for a CQI value of 10.3 (as given in our input parameters above).
+        
+        Table1
+        CQI = 10 Efficiency_EF1: 2.7305, CQI = 11 Efficiency_EF2: 3.3223
+        For CQI = 10.3, 
+            Efficiency = (Efficiency_EF2 - Efficiency_EF1) * (10.3 - 10) + Efficiency_EF1
+        
+        The above formula is simply considering the slope of line formula (y = mx + b), and trying to add the efficiency of CQI=10 and then adding the efficiency based on the slope between efficiency of CQI 11 and CQI 10.
+        
+        n_efficiency = Efficiency_table1 * (1 - 256QAM_Usage) + Efficiency_table2 * (256QAM_Usage)
+        
 
 Considering that you did read the above paragraph, the final Cell Capacity would be calculated as,
 
-	Cell Capacity (Mbps) = (100) * n_re_pdsch_wo_mimo x n_efficiency x (1 * (1 - Rank2_Ratio - Rank3_Ratio - Rank4_Ratio) + 2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) x (1 - IBLER_Ratio) / 1024 / 1024
-	
-	* 100 multiplication is there because we calculated PDSCH RE for 1 frame. There are 100 frames in a second. (1000 TTIs).
+    Cell Capacity (Mbps) = (100) * n_re_pdsch_wo_mimo x n_efficiency x (1 * (1 - Rank2_Ratio - Rank3_Ratio - Rank4_Ratio) + 2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) x (1 - IBLER_Ratio) / 1024 / 1024
+    
+    * 100 multiplication is there because we calculated PDSCH RE for 1 frame. There are 100 frames in a second. (1000 TTIs).
 
 **(1 * (1 - Rank2_Ratio - Rank3_Ratio - Rank4_Ratio) + 2 * Rank2_Ratio + 3 * Rank3_Ratio + 4 * Rank4_Ratio) : This term is trying to calculate the usage of Rank1 and others and then multiplies the gain with the capacity considering that Rank2 essentially means double the capacity and so on.**
 
 
-**Phew**. This was too much indeed. You have now earned the right to go to the [LTEFDD-Capacity Calculator](ltefdd-capacitycalculator.md) and perform capacity calculations. 
-
-
+**Phew**. This was too much indeed. You have now earned the right to go to the [LTEFDD-Capacity Calculator](ltefdd-capacitycalculator.md) and perform capacity calculations.
